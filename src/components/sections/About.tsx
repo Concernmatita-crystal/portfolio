@@ -38,9 +38,9 @@ export default function About() {
             <p className="text-muted-foreground leading-relaxed text-base mb-5">
               I'm a <strong className="text-foreground">frontend developer and ICT professional</strong> with a heart for tech that changes lives. Over the past couple of years, I've worked with both startups and public institutions to build digital tools that actually matter — from websites for government services to innovative platforms for social good.
             </p>
-            <p className="text-muted-foreground leading-relaxed text-base mb-5">
+            {/* <p className="text-muted-foreground leading-relaxed text-base mb-5">
               In my current role at <strong className="text-foreground">Malawi Post Corporation</strong>, I've been hands-on with everything from website management to troubleshooting complex IT issues, making sure systems run smoothly for thousands of users.
-            </p>
+            </p> */}
             <p className="text-muted-foreground leading-relaxed text-base">
               Whether it's crafting responsive interfaces in React, managing websites, or mentoring others through digital skills programs — I'm all about <strong className="text-primary">using tech for good</strong>.
             </p>
