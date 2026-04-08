@@ -3,6 +3,22 @@ import { useRef } from "react";
 import { MapPin, Calendar } from "lucide-react";
 
 const experiences = [
+   {
+    role: "Graduate Trainee",
+    company: "Britam Insurance Malawi",
+    period: "Jul 2025 – Present",
+    location: "Malawi",
+    description:
+      "Rotated across ICT, Claims, Finance, and Underwriting departments, gaining broad operational exposure to business systems and end-to-end administrative processes.",
+    achievements: [
+      "Provided technical support including hardware/software installation, troubleshooting, and network connectivity across departments",
+      "Assisted with system updates, routine maintenance, and data management within policy and claims administration systems",
+      "Processed customer and intermediary payments and supported month-end account reconciliations",
+      "Maintained ICT equipment and upheld the security and integrity of organisational data systems",
+    ],
+    tags: ["ICT Support", "Claims Administration", "Finance", "Underwriting", "Data Management", "Networking"],
+  },
+
   {
     role: "ICT Intern",
     company: "Malawi Post Corporation",

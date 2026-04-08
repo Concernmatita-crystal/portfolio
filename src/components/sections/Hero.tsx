@@ -1,5 +1,42 @@
 import { motion } from "framer-motion";
 import { ArrowDown, Download, Github, Linkedin, Mail } from "lucide-react";
+import { useEffect, useState } from "react";
+
+function TypewriterText({ text, className, delay = 0 }: { text: string; className?: string; delay?: number }) {
+  const [displayed, setDisplayed] = useState("");
+  const [phase, setPhase] = useState<"wait" | "typing" | "pause" | "deleting">("wait");
+
+  useEffect(() => {
+    let timer: ReturnType<typeof setTimeout>;
+
+    if (phase === "wait") {
+      timer = setTimeout(() => setPhase("typing"), delay * 2000);
+    } else if (phase === "typing") {
+      if (displayed.length < text.length) {
+        timer = setTimeout(() => setDisplayed(text.slice(0, displayed.length + 1)), 80);
+      } else {
+        timer = setTimeout(() => setPhase("pause"), 1800);
+      }
+    } else if (phase === "pause") {
+      setPhase("deleting");
+    } else if (phase === "deleting") {
+      if (displayed.length > 0) {
+        timer = setTimeout(() => setDisplayed(text.slice(0, displayed.length - 1)), 45);
+      } else {
+        timer = setTimeout(() => setPhase("typing"), 400);
+      }
+    }
+
+    return () => clearTimeout(timer);
+  }, [phase, displayed, text, delay]);
+
+  return (
+    <span className={className}>
+      {displayed}
+      <span className="animate-pulse opacity-70">|</span>
+    </span>
+  );
+}
 
 export default function Hero() {
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -54,9 +91,9 @@ export default function Hero() {
               className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-tight text-foreground font-display mb-6"
             >
               Hi, I'm{" "}
-              <span className="text-primary">Concern</span>
+              <TypewriterText text="Concern" className="text-primary" delay={0.8} />
               <br />
-              <span className="text-secondary">Matita</span>
+              <TypewriterText text="Matita" className="text-secondary" delay={2} />
             </motion.h1>
 
             <motion.p
@@ -130,16 +167,26 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* Stats card */}
+          {/* Stats card — floating */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9, x: 40 }}
             animate={{ opacity: 1, scale: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
             className="hidden lg:flex flex-col gap-4"
           >
-            <div className="bg-card border border-border/50 rounded-2xl p-8 shadow-lg">
+            <motion.div
+              animate={{ y: [0, -10, 0] }}
+              transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+              className="bg-card border border-border/50 rounded-2xl p-8 shadow-lg"
+            >
               <p className="text-muted-foreground text-sm mb-1">Currently working on</p>
-              <p className="text-foreground font-semibold text-lg mb-6">My Portfolio</p>
+              <motion.p
+                className="text-foreground font-semibold text-lg mb-6"
+                animate={{ opacity: [1, 0.5, 1] }}
+                transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+              >
+                My Portfolio ✦
+              </motion.p>
               <div className="grid grid-cols-3 gap-4">
                 {[
                   { value: "2+", label: "Years Exp." },
@@ -155,20 +202,22 @@ export default function Hero() {
                   </div>
                 ))}
               </div>
-            </div>
+            </motion.div>
 
             <div className="grid grid-cols-2 gap-4">
               {[
                 { label: "Frontend Dev", tag: "React · JS · TypeScript" },
                 { label: "ICT Professional", tag: "Systems · Networks · Support" },
-              ].map((card) => (
-                <div
+              ].map((card, i) => (
+                <motion.div
                   key={card.label}
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{ repeat: Infinity, duration: 3.5, ease: "easeInOut", delay: i * 0.8 }}
                   className="bg-card border border-border/50 rounded-xl p-5 shadow-sm hover:border-primary/30 transition-colors"
                 >
                   <p className="font-semibold text-foreground text-sm mb-1">{card.label}</p>
                   <p className="text-xs text-muted-foreground">{card.tag}</p>
-                </div>
+                </motion.div>
               ))}
             </div>
           </motion.div>
