@@ -8,8 +8,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-      "predeploy": "npm run build",
-      "deploy": "gh-pages -d dist"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "devDependencies": {
     "@radix-ui/react-slot": "^1.2.0",
@@ -24,7 +24,7 @@
     "@vitejs/plugin-react": "^4.4.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "framer-motion": "^12.7.3",
+    "framer-motion": "^12.38.0",
     "lucide-react": "^0.503.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
@@ -36,5 +36,4 @@
     "vite": "^6.4.2",
     "wouter": "^3.3.5"
   }
-  
 }
